@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MovieCard from "../components/MovieCard";
 
 function Home() {
@@ -9,7 +9,12 @@ function Home() {
     { id: 4, title: "Interstellar", release_date: "2022" },
   ];
 
-  const handleSearch = () => {};
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    alert(searchQuery);
+  };
 
   return (
     <div className="home">
@@ -18,13 +23,15 @@ function Home() {
           type="text"
           placeholder="Search for movies..."
           className="search-input"
+          value={searchQuery}
+          onChange={(e)=> setSearchQuery(e.target.value)}
         />
         <button type="submit" className="search-button">Search</button>
       </form>
 
       <div className="movies-grid">
-        {movies.map((movie) => (
-          <MovieCard movie={movie} key={movie.id} />
+        {movies.map((movie) => ( 
+            <MovieCard movie={movie} key={movie.id} />
         ))}
       </div>
     </div>
